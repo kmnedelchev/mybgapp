@@ -6,17 +6,20 @@ services:
         ports:
             - 8080:80
         volumes:
-          - "/home/vagrant/bgapp/web:/var/www/html:ro"
+          - "/home/vagrant/mybgapp/web:/var/www/html:ro"
         networks:
             - app-network
     db:
         image: kmnedelchev/bgapp-db
+        network:
+            - app-network
         environment:
             MYSQL_ROOT_PASSWORD_FILE: /run/secrets/db_root_password
         secrets:
            - db_root_password
-        secrets:
-          db_root_password:
-            external: true
-        networks:
-          app-network
+
+secrets:
+    db_root_password:
+        external: true
+networks:
+    app-network:
