@@ -11,7 +11,7 @@ services:
             - app-network
     db:
         image: kmnedelchev/bgapp-db
-        network:
+        networks:
             - app-network
         environment:
             MYSQL_ROOT_PASSWORD_FILE: /run/secrets/db_root_password
